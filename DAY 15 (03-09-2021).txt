@@ -1,0 +1,1561 @@
+A) Creating  bank database:
+->create database customer;
+
+Database usage:
+-> use customer;
+
+Creating table:
+->  create table customerinfo(customerid int auto_increment primary key,customername varchar(20),customercity varchar(20),customeraddress varchar(50),customermoblieno bigint unique,PAN varchar(20) unique,customerpassword varchar(80))auto_increment=100;
+
+Inserting values:
+->insert into customerinfo values(100,'nandhini','Chennai','Saidapet',8778695997,'DUVG2345',MD5('nandy31'));
+->insert into customerinfo values(101,'Abhirami','Chennai','Anna Nagar',9849834567,'KLMH4573',MD5('abhi13'));
+->insert into customerinfo values(102,'Niranjan','Kancheepuram','Natesan nagar',7856045980,'HJKN2389',MD5('niranjan11'));
+->insert into customerinfo values(103,'Sumathi','Chennai','Adyar',994065933,'NHGV2390',MD5('susmathi89'));
+->insert into customerinfo values(104,'Divya','Madurai','Bharathi colony',8745689456,'HBGF5643',MD5('divy67'));
+->insert into customerinfo values(105,'Lalitha','Thiruvallur','Krishna Nagar',9635854407,'KIVGN42574',MD5('Lali67'));
+->insert into customerinfo values(106,'Ramalingam','Chennai','Vadapalani',8569857407,'NHBF2378',MD5('ramu98'));
+->insert into customerinfo values(107,'Gautham','Chennai','Teynampet',7598857327,'KLNM4578',MD5('gautham34'));
+->insert into customerinfo values(108,'Thirumurugan',Thiruvallur','Vani Nagar',7598235877,'KNUY3214',MD5('thiru56'));
+->insert into customerinfo values(109,'Karthi','Kancheepuram','Kundrathur',9867598543,'KOP1234LOF',MD5('Karthi75'));
+
+Displaying values:
+-> select *from customerinfo;
++------------+--------------+--------------+-----------------------+------------------+------------+----------------------------------+
+| customerid | customername | customercity | customeraddress       | customermoblieno | PAN        | customerpassword                 |
++------------+--------------+--------------+-----------------------+------------------+------------+----------------------------------+
+|        100 | Nandhini| Chennai        | Saidapet             |       8778695997| DUVG2345| 8dee3710465d56489e160697f |
+|        101 | Abhirami     | Chennai      | Anna Nagar            |       9849834567| KLMH4573| ae515e0b80fb4c588e3c804 |
+|        102 | Niranjan        | Kancheepuram   | Natesan nagar     |       7856045980| HJKN2389| f4350ca5dee7f3c52085efb3 |
+|        103 | Sumathi    | Chennai      | Adyar              |       9940665933| NHGV2390| d90db30e25507565e54902a6 |
+|        104 | Divya      | Madurai | Bharathi colony      |       8745689456| HBGF5643|262dc107ffea88af586d84 |
+|        105 | Lalitha  | Thiruvallur  | Krishna Nagar             |       9635854407 | KIVGN42574 | 21f1290361cba87f805540 |
+|        106 | Ramalingam      | Chennai       | Vadapalani |       8569857407| NHBF2378| 0d9706c31c6abf6779ef3f1 |
+|        107 | Gautham       | Chennai      | Teynampet            |       7598857327 | KLNM4578| 89b4a19ac35391a4e781ad749 |
+|        108 | Thirumurugan  | Thiruvallur  | Vani Nagar           |       7598235877| KNUY3214| adf2eb72598e899d09a955186 |
+|        109 | Karthi   | Kancheepuram       | Kundrathur|       9867598543| KOP1234LOF | fcd3ee8eff975b242cf6a79 |
++------------+--------------+--------------+-----------------------+------------------+------------+----------------------------------+
+10 rows in set (0.04 sec)
+
+Creating AccountInfo table:
+->create table AccountInofo(accountid bigint auto_increment primary key,customerid int,foreign key(customerid)references customerinfo(customerid),AccountType varchar(20),AccountBalance bigint,AccountOpenDate date,AccountStatus varchar(10) not null CHECK(AccountStatus in ('Open','Closed','Blocked')));
+
+Inserting into accountinfo:
+-> insert into AccountInofo values(14579631,100,'salary',20000,'2000-05-06','open');
+-> insert into AccountInofo values(14579632,102,'savings',30000,'2001-10-05','closed');
+-> insert into AccountInofo values(14579633,103,'current account',35000,'1999-12-15','blocked');
+-> insert into AccountInofo values(14579634,104,'salary',40000,'2005-11-03','closed');
+-> insert into AccountInofo values(14579635,105,'savings',45000,'2004-10-10','blocked');
+->insert into AccountInofo values(14579636,106,'salary',50000,'2003-09-09','open');
+-> insert into AccountInofo values(14579637,107,'savings',55000,'2002-12-12','closed');
+->insert into AccountInofo values(14579638,101,'current account',60000,'2000-03-02','blocked');
+-> insert into AccountInofo values(14579639,108,'savings',65000,'1998-12-04','open');
+->insert into AccountInofo values(14579640,109,'salary',70000,'2002-07-07','closed');
+
+Displaying values:
+-> select *from accountinofo;
+ 
++-----------+------------+-----------------+----------------+-----------------+---------------+
+| accountid | customerid | AccountType     | AccountBalance | AccountOpenDate | AccountStatus |
++-----------+------------+-----------------+----------------+-----------------+---------------+
+|  14579631 |        100 | salary          |          20000 | 2000-05-06      | open          |
+|  14579632 |        102 | salary        |          30000 | 2001-10-05      | closed        |
+|  14579633 |        103 | current account |          35000 | 1999-12-15      | blocked       |
+|  14579634 |        104 | savings        |          40000 | 2005-11-03      | closed        |
+|  14579635 |        105 | savings         |          45000 | 2004-10-10      | blocked       |
+|  14579636 |        106 | salary          |          50000 | 2003-09-09      | open          |
+|  14579637 |        107 | salary         |          55000 | 2002-12-12      | closed        |
+|  14579638 |        101 | current account |          60000 | 2000-03-02      | blocked       |
+|  14579639 |        108 | savings         |          65000 | 1998-12-04      | open          |
+|  14579640 |        109 | salary          |          70000 | 2002-07-07      | closed        |
++-----------+------------+-----------------+----------------+-----------------+---------------+
+10 rows in set (0.00 sec)
+
+
+Creating Transactioninfo table:
+create table transactioninfo(transactionid int auto_increment primary key,accountid bigint,foreign key(accountid)references accountinofo(accountid),transactiontype varchar(20) default 'NotDone',amount bigint check(amount>0),transactiondate date);
+
+Inserting values:
+->insert into transactioninfo values(120,15879631,'debit',60000,'2021-06-03');
+-> insert into transactioninfo values(121,15879633,'debit',70000,'2019-11-07');
+->insert into transactioninfo values(127,15879632,'credit',65000,'2020-12-27');
+-> insert into transactioninfo values(123,15879634,'credit',75000,'2020-04-10');
+-> insert into transactioninfo values(124,15879635,'debit',80000,'2019-11-03');
+->insert into transactioninfo values(125,15879636,'credit',85000,'2018-05-01');
+->insert into transactioninfo values(126,15879637,'debit',85500,'207-10-10');
+-> insert into transactioninfo values(128,15879638,'credit',85504,'2017-02-02');
+-> insert into transactioninfo values(129,15879639,'credit',90000,'2016-12-05');
+-> insert into transactioninfo values(130,15879640,'debit',90500,'2016-11-05');
+
+Displaying the table:
+->select *from transactioninfo;
+  
++---------------+-----------+-----------------+--------+-----------------+
+| transactionid | accountid | transactiontype | amount | transactiondate |
++---------------+-----------+-----------------+--------+-----------------+
+|           120 |  14579631 | debit           |  60000 | 2021-06-03      |
+|           121 |  14579633 | debit           |  70000 | 2019-11-07      |
+|           123 |  14579634 | credit          |  75000 | 2020-04-10      |
+|           124 |  14579635 | debit           |  80000 | 2019-11-03      |
+|           125 |  14579636 | credit          |  85000 | 2018-05-01      |
+|           126 |  14579637 | debit           |  85500 | 0207-10-10      |
+|           127 |  14579632 | credit          |  65000 | 2020-12-27      |
+|           128 |  14579638 | credit          |  85504 | 2017-02-02      |
+|           129 |  14579639 | credit          |  90000 | 2016-12-05      |
+|           130 |  14579640 | debit           |  90500 | 2016-11-05      |
++---------------+-----------+-----------------+--------+-----------------+
+10 rows in set (0.00 sec)
+
+
+
+Questions:
+
+1. Latest 5 transactions of an account (Enter Account ID as an Input).
+->insert into transactioninfo values(131,14579640,'credit',90505,'2017-02-05');
+->insert into transactioninfo values(132,14579640,'debit',10000,'2018-04-03');
+->insert into transactioninfo values(133,14579640,'credit',15000,'2018-12-14');
+-> insert into transactioninfo values(134,14579640,'credit',15500,'2018-11-14');
+-> insert into transactioninfo values(135,14579640,'debit',25500,'2020-03-02');
+
+select*from transactioninfo;
++---------------+-----------+-----------------+--------+-----------------+
+| transactionid | accountid | transactiontype | amount | transactiondate |
++---------------+-----------+-----------------+--------+-----------------+
+|           120 |  14579631 | debit           |  60000 | 2021-06-03      |
+|           121 |  14579633 | debit           |  70000 | 2019-11-07      |
+|           123 |  14579634 | credit          |  75000 | 2020-04-10      |
+|           124 |  14579635 | debit           |  80000 | 2019-11-03      |
+|           125 |  14579636 | credit          |  85000 | 2018-05-01      |
+|           126 |  14579637 | debit           |  85500 | 0207-10-10      |
+|           127 |  14579632 | credit          |  65000 | 2020-12-27      |
+|           128 |  14579638 | credit          |  85504 | 2017-02-02      |
+|           129 |  14579639 | credit          |  90000 | 2016-12-05      |
+|           130 |  14579640 | debit           |  90500 | 2016-11-05      |
+|           131 |  14579640 | credit          |  90505 | 2017-02-05      |
+|           132 |  14579640 | debit           |  10000 | 2018-04-03      |
+|           133 |  14579640 | credit          |  15000 | 2018-12-14      |
+|           134 |  14579640 | credit          |  15500 | 2018-11-14      |
+|           135 |  14579640 | debit           |  25500 | 2020-03-02      |
++---------------+-----------+-----------------+--------+-----------------+
+
+->select * from transactioninfo where accountid=14579640 order by transactiondate desc limit 5;
++---------------+-----------+-----------------+--------+-----------------+
+| transactionid | accountid | transactiontype | amount | transactiondate |
++---------------+-----------+-----------------+--------+-----------------+
+|           135 |  14579640 | debit           |  25500 | 2020-03-02      |
+|           133 |  14579640 | credit          |  15000 | 2018-12-14      |
+|           134 |  14579640 | credit          |  15500 | 2018-11-14      |
+|           132 |  14579640 | debit           |  10000 | 2018-04-03      |
+|           131 |  14579640 | credit          |  90505 | 2017-02-05      |
++---------------+-----------+-----------------+--------+-----------------+
+
+2.Transaction between two dates of an account (Enter Account ID as an Input)
+ ->select *from transactioninfo where accountid=15879640 and transactiondate between '2017-02-05' and '2020-03-02';
++---------------+-----------+-----------------+--------+-----------------+
+| transactionid | accountid | transactiontype | amount | transactiondate |
++---------------+-----------+-----------------+--------+-----------------+
+|           131 |  14579640 | credit          |  90505 | 2017-02-05      |
+|           132 |  14579640 | debit           |  10000 | 2018-04-03      |
+|           133 |  14579640 | credit          |  15000 | 2018-12-14      |
+|           134 |  14579640 | credit          |  15500 | 2018-11-14      |
+|           135 |  14579640 | debit           |  25500 | 2020-03-02      |
++---------------+-----------+-----------------+--------+-----------------+
+5 rows in set (0.00 sec)
+
+3. List of Accounts of a Customer (Enter Customer ID as an input)
+-> select * from accountinofo where customerid=100;
++-----------+------------+-------------+----------------+-----------------+---------------+
+| accountid | customerid | AccountType | AccountBalance | AccountOpenDate | AccountStatus |
++-----------+------------+-------------+----------------+-----------------+---------------+
+|  14579631 |        100 | salary      |          20000 | 2000-05-06      | open          |
++-----------+------------+-------------+----------------+-----------------+---------------+
+1 row in set (0.46 sec)
+
+4.List of customers(CustomerID,CustomerName,CustomerAddress,CustomerMobileNo, AccountID , AccountBalance).
+->select a.customerid,a.customername,a.customeraddress,a.customermoblieno,b.accountid,b.accountbalance from customerinfo a,accountinofo b where a.customerid=b.customerid;
++------------+--------------+-----------------------+------------------+-----------+----------------+
+| customerid | customername | customeraddress       | customermoblieno | accountid | accountbalance |
++------------+--------------+-----------------------+------------------+-----------+----------------+
+|        100 | Nandhini    | Saidapet             |       8778695997 |  14579631 |          20000 |
+|        101 | Abhirami      | Anna Nagar            |       9849834567|  14579638 |          60000 |
+|        102 | Niranjan       | Natesan Nagar      |       87856045980 |  14579632 |          30000 |
+|        103 | Sumathi    | Adyar              |       9940665933 |  14579633 |          35000 |
+|        104 | Divya       | Bharathi colony      |       8745689456 |  14579634 |          40000 |
+|        105 | Lalitha   | Krishna Nagar    |       9635854407 |  14579635 |          45000 |
+|        106 | Ramalingam      | Vadapalani|       856988574047 |  14579636 |          50000 |
+|        107 | Gautham       | Teynampet           |       7598857327 |  14579637 |          55000 |
+|        108 |  Thirumurugan | Vani Nagar           |       7598235877 |  14579639 |          65000 |
+|        109 | Karthi   | Kundrathur |       9867598543 |  14579640 |          70000 |
++------------+--------------+-----------------------+------------------+-----------+----------------+
+10 rows in set (0.00 sec)
+
+5.List of accounts with transactions (AccountID , AccountBalance , TransID , Amount, TransationType).
+->select a.accountid,a.accountbalance,b.transactionid,b.amount,b.transactiontype from accountinofo a,transactioninfo b where a.accountid=b.accountid;
++-----------+----------------+---------------+--------+-----------------+
+| accountid | accountbalance | transactionid | amount | transactiontype |
++-----------+----------------+---------------+--------+-----------------+
+|  14579631 |          20000 |           120 |  60000 | debit           |
+|  14579632 |          30000 |           127 |  65000 | credit          |
+|  14579633 |          35000 |           121 |  70000 | debit           |
+|  14579634 |          40000 |           123 |  75000 | credit          |
+|  14579635 |          45000 |           124 |  80000 | debit           |
+|  14579636 |          50000 |           125 |  85000 | credit          |
+|  14579637 |          55000 |           126 |  85500 | debit           |
+|  14579638 |          60000 |           128 |  85504 | credit          |
+|  14579639 |          65000 |           129 |  90000 | credit          |
+|  14579640 |          70000 |           130 |  90500 | debit           |
+|  14579640 |          70000 |           131 |  90505 | credit          |
+|  14579640 |          70000 |           132 |  10000 | debit           |
+|  14579640 |          70000 |           133 |  15000 | credit          |
+|  14579640 |          70000 |           134 |  15500 | credit          |
+|  14579640 |          70000 |           135 |  25500 | debit           |
++-----------+----------------+---------------+--------+-----------------+
+15 rows in set (0.00 sec)
+
+6. List of customers with accounts and transations (CustomerID,CustomerName,CustomerAddress,CustomerMobileNo, AccountID , AccountBalance,TransationID , Amount, TransationType)
+->select a.customerid,a.customername,a.customername,a.customermoblieno,b.accountid,b.accountbalance,c.transactionid,c.amount,c.transactiontype from customerinfo a,accountinofo b,transactioninfo c where a.customerid=b.customerid and b.accountid=c.accountid;
++------------+--------------+--------------+------------------+-----------+----------------+---------------+--------+-----------------+
+| customerid | customername | customermoblieno | accountid | accountbalance | transactionid | amount | transactiontype |
++------------+--------------+--------------+------------------+-----------+----------------+---------------+--------+-----------------+
+|        100 | Nandhini    | 8778695997 |  14579631 |          20000 |           120 |  60000 | debit           |
+|        101 | Abhirami      |9849834567 |  14579638 |          60000 |           128 |  85504 | credit          |
+|        102 | Niranjan       |7856045980 |  14579632 |          30000 |           127 |  65000 | credit          |
+|        103 | Sumathi    |9940665933 |  14579633 |          35000 |           121 |  70000 | debit           |
+|        104 | Divya      |8745689456 |  14579634 |          40000 |           123 |  75000 | credit          |
+|        105 | Lalitha   |9635854407 |  14579635 |          45000 |           124 |  80000 | debit           |
+|        106 |  Ramalingam     |8569857407 |  14579636 |          50000 |           125 |  85000 | credit          |
+|        107 | Gautham       | 7598857327|  14579637 |          55000 |           126 |  85500 | debit           |
+|        108 | Thirumurugan  | 7598235877 |  14579639 |          65000 |           129 |  90000 | credit          |
+|        109 | Karthi   |9867598543 |  14579640 |          70000 |           130 |  90500 | debit           |
+|        109 | karthi  | 9867598543 |  14579640 |          70000 |           131 |  90505 | credit          |
+|        109 | Karthi  | 9867598543 |  14579640 |          70000 |           132 |  10000 | debit           |
+|        109 | Karthi   |9867598543 |  14579640 |          70000 |           133 |  15000 | credit          |
+|        109 | Karthi   | 9867598543 |  14579640 |          70000 |           134 |  15500 | credit          |
+|        
++------------+--------------+--------------+------------------+-----------+----------------+---------------+--------+-----------------+
+14 rows in set (0.00 sec)
+
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+B) OnlineFoodOrderingDB
+
+create database
+
+-> create database OnlineFoodOrderingDB;
+
+creating table:
+
+->create table restaurants(restaurantid int auto_increment primary key,restaurantname varchar(20),restraurantaddress varchar(20),restaurantcity varchar(20),contactno bigint);
+
+Inserting values:
+-> insert into restaurants values(18,'KFC','Anna Nagar','Chennai',8778695997);
+->insert into restaurants values(11,'Swing Rolls','Adyar','Chennai',9855321567);
+-> insert into restaurants values(19,'Subway','Besant Nagar','Chennai',8889456789);
+->insert into restaurants values(17,'Marry Brown','Ambattur','Chennai',9856734980);
+-> insert into restaurants values(15,'Green Loaf','OMR','Chennai',7856734563);
+-> insert into restaurants values(16,'Hot Chips','Thoraipakkam','Chennai',9856723467);
+
+displaying table:
+select*from restaurants;
++--------------+-----------------+---------------------+----------------+------------+
+| restaurantid | restaurantname  | restraurantaddress  | restaurantcity | contactno  |
++--------------+-----------------+---------------------+----------------+------------+
+|           18 | KFC         | Anna Nagar   | Chennai| 8778695997 |
+|           11 | Swing Rolls |Adyar            | Chennai    | 9855321567 |
+|           19 | Subway     | Besant Nagar      | Chennai| 8889456789 |
+|           17 | marry Brown   | Ambattur     |Chennai| 9856734980 |
+|           15 | Green Loaf | OMR | Chennai| 7856734563 |
+|           16 |Sangeetha| Thoraipakkam | Kancheepuram | 9856723467|
++--------------+-----------------+---------------------+----------------+------------+
+6 rows in set (0.00 sec)
+
+creating table:
+create table rmenuitems(menuid int auto_increment primary key,restaurantid int,foreign key(restaurantid) references restaurants(restaurantid),menuname varchar(20),menutype varchar(20),menucategory varchar(20),menuprice int,menudesc varchar(20));
+
+Inserting values:
+->insert into rmenuitems values(50,10,'non-veg','snack','snack',200,'Hot Wings');
+->insert into rmenuitems values(51,11,'veg','main dish','breakfast',100,'dosa');
+->insert into rmenuitems values(52,12,'non-veg','snack','Dinner',150,'Burger');
+->insert into rmenuitems values(53,13,'veg','main dish','dinner',90,'noodles');
+-> insert into rmenuitems values(54,14,'veg','milkshake','snacks',50,'Chocolate shake');
+->insert into rmenuitems values(55,15,'veg','main dish','Lunch',160,'Meals');
+
+Displaying table:
+select*from rmenuitems;
++--------+--------------+----------+-----------+--------------+-----------+-----------------+
+| menuid | restaurantid | menuname | menutype  | menucategory | menuprice | menudesc        |
++--------+--------------+----------+-----------+--------------+-----------+-----------------+
+|     50 |           18 | non-veg      | snack   | dinner       |        200 | Hot Wings         |
+|     51 |           11 | veg      | main dish | breakfast    |       100 | dosa            |
+|     52 |           19 | non-veg  | snack | lunch        |       150 | Burger |
+|     53 |           17 | veg  | main dish | dinner       |       90 |  noodles   |
+|     54 |           15 | veg      | milkshake    | snacks       |        50 | Chocolate shake    |
+|     55 |           16 | veg  | main dish | lunch    |       160 | Meals    |
++--------+--------------+----------+-----------+--------------+-----------+-----------------+
+6 rows in set (0.00 sec)
+
+
+Creating table:
+create table customers(customerid varchar(20) primary key,customername varchar(20),customercity varchar(10),customerDOB date,customergender varchar(10) check(customergender IN('F','M','T')),customerpassword varchar(50));
+
+Inserting values:
+->insert into customers values('nandhini@gmail.com','Nandhini','Chennai','2000-05-31','F',MD5('nandy@08'));
+->insert into customers values('Sumathi98@gmail.com','Sumathi','Chennai','1972-07-04','F',MD5('sumathi'));
+-> insert into customers values('Divya@gmail.com','Divya','Chennai','1995-02-12','F',MD5('Divy27'));
+-> insert into customers values('Abhi13@gmail.com','Abhirami','Chennai','2010-09-23','F',MD5('abhi13'));
+-> insert into customers values('Karthi30@gmail.com','Karthi','Chennai','2009-11-30','M',MD5('karthi12'));
+->insert into customers values('Kumar11@gmail.com','Kumar,'Chennai','1970-06-26','M',MD5('kumar45'));
+
+Displaying table:
+
+-> select*from customers;
++--------------------+--------------+--------------+-------------+----------------+----------------------------------+
+| customerid         | customername | customercity | customerDOB | customergender | customerpassword                 |
++--------------------+--------------+--------------+-------------+----------------+----------------------------------+
+| nandhini@gmail.com  | Nandhini      | chennai      | 2000-05-31  | F              | e863b64bd81f5732a11713184ddc8af1 |
+| sumathi@gmail.com   | Sumathi       | chennai      | 1972-07-04 | F              | 8a567c484832dbcfe5b311cdaedb5625 |
+| Divya@gmail.com   | Divya       | chennai      | 1995-02-12| F            | 8dc4af1754008b7d2cd642ce4f0edde2 |
+| Abhi@gmail.com | Abhirami   | chennai      | 2010-09-23  | F              | 54a1d1a247256fc4e11bf9a4bc6a9e37 |
+| Karthi@gmail.com  | Karthi   | chennai      | 2009-11-30  | M              | a100b3ee7ea55fd9e589a1fa0dea2835 |
+| Kumar@gmail.com | Kumar     | chennai      | 1970-06-26  | M             | 58b2521226e5d8316d1b54a1a45d90d6 |
++--------------------+--------------+--------------+-------------+----------------+----------------------------------+
+
+Creating table:
+create table orders(orderid int auto_increment primary key,customerid varchar(20),foreign key(customerid) references customers(customerid),orderdate date,deliveryaddress varchar(20),orderstatus varchar(20) check(orderstatus in('Delivered','Cancelled')));
+
+Inserting values:
+-> insert into orders values(31,' nandhini@gmail.com  ','2021-03-22','Chennai','Cancelled');
+->insert into orders values(30,'Sumathi98@gmail.com','2021-02-03','Chennai','Delivered');
+->insert into orders values(33,'Divya@gmail.com','2021-04-22','Cennai','Delivered');
+->insert into orders values(34,'Abhi13@gmail.com','2021-05-06','Chennai','Delivered');
+->insert into orders values(32,'karthi30@gmail.com','2021-05-08','Chennai','Delivered');
+-> insert into orders values(35,'Kumar11@gmail.com','2020-05-08','Chennai','Cancelled');
+
+
+Displaying table:
+-> select*from orders;
++---------+--------------------+------------+-----------------+-------------+
+| orderid | customerid         | orderdate  | deliveryaddress | orderstatus |
++---------+--------------------+------------+-----------------+-------------+
+|      30 | nandhini@gmail.com| 2021-03-22 | Chennai| Cancelled   |
+|      31 | Sumathi98@gmail.com| 2021-02-03 | Chennai| | Delivered   |
+|      32 | Divya@gmail.com| 2021-04-22 | Chennai| | Delivered   |
+|      33 | Abhi13@gmail.com| 2021-05-06 | Chennai| | Delivered   |
+|      34 | karthi30@gmail.com| 2021-05-08 | Chennai| | Delivered   |
+|      35 | Kumar11@gmail.com| 2020-05-08 | Chennai| | Cancelled   |
++---------+--------------------+------------+-----------------+-------------+
+6 rows in set (0.00 sec)
+
+Creating tables:
+ create table ordermenus(orderid int,foreign key(orderid)references orders(orderid),menuid int,foreign key(menuid)references rmenuitems(menuid),menuqty int,menuprice int);
+
+Inserting values:
+-> insert into ordermenus values(31,51,1,100);
+-> insert into ordermenus values(32,52,5,860);
+->insert into ordermenus values(30,50,3,250);
+->insert into ordermenus values(33,53,2,250);
+->insert into ordermenus values(34,55,1,90);
+-> insert into ordermenus values(35,54,7,1050);
+
+Displaying table:
+->select*from ordermenus;
++---------+--------+---------+-----------+
+| orderid | menuid | menuqty | menuprice |
++---------+--------+---------+-----------+
+|      30 |     50 |       3 |       250 |
+|      31 |     51 |       1 |       100 |
+|      32 |     52 |       5 |       860 |
+|      33 |     53 |       2 |       250 |
+|      34 |     55 |       1 |        90 |
+|      35 |     54 |       7 |      1050 |
++---------+--------+---------+-----------+
+6 rows in set (0.00 sec)
+
+1. Show the list of Restaurant of specific city
+
+-> select restaurantname,restaurantcity from restaurants where restaurantcity='VNR';
++-----------------+----------------+
+| restaurantname  | restaurantcity |
++-----------------+----------------+
+| kamaliya garden | VNR            |
+| kamaliya        | VNR            |
++-----------------+----------------+
+2 rows in set (0.00 sec)
+
+2.Show the list of all Restaurants along with menus (RestaurantID , RestaurantName ,MenuID , MenuName , MenuPrice)
+
+-> select a.restaurantid,a.restaurantname,b.menuid,b.menuname,b.menuprice from restaurants a,rmenuitems b where a.restaurantid=b.restaurantid;
++--------------+-----------------+--------+----------+-----------+
+| restaurantid | restaurantname  | menuid | menuname | menuprice |
++--------------+-----------------+--------+----------+-----------+
+|           18 | KFC         |     50 | non-veg      |        200 |
+|           11 | Swing Rolls      |     51 | veg      |       100 |
+|           19 | Subway     |     52 | non-veg  |       150 |
+|           17| Marry Brown  |     53 | veg  |       90 |
+|           15 | Green Loaf |     54 | veg      |        50 |
+|           16 | Sangeetha       |     55 | veg  |       160 |
++--------------+-----------------+--------+----------+-----------+
+6 rows in set (0.02 sec)
+
+3. Show the list of  Restaurants along with menus (RestaurantID , RestaurantName ,MenuID , MenuName , MenuPrice) of specific city
+
+-> select a.restaurantid,a.restaurantname,b.menuid,b.menuname,b.menuprice from restaurants a,rmenuitems b where a.restaurantcity='Kancheepuram';
++--------------+----------------+--------+----------+-----------+
+| restaurantid | restaurantname | menuid | menuname | menuprice |
++--------------+----------------+--------+----------+-----------+
+|           16 | Sangeetha        |     50 | non-veg      |        200 |
+|           16 | Sangeetha        |     51 | veg      |       100 |
+|           16 | Sangeetha        |     52 |non- veg  |       150 |
+|           16 | Sangeetha        |     53 | veg  |       90|
+|           16 | Sangeetha        |     54 | veg      |        50 |
+|           16 | Sangeetha        |     55 | veg  |       160 |
++--------------+----------------+--------+----------+-----------+
+6 rows in set (0.00 sec)
+
+4. Show the list of Orders of a specific customer
+
+->-------------+--------------------+--------------+---------+------------+-------------+---------+-----------+
+| CustomerName | CustomerID         | CustomerCity | OrderID | OrderDate  | OrderStatus | MenuQty | MenuPrice |
++--------------+--------------------+--------------+---------+------------+-------------+---------+-----------+
+| vishaali     | nandhini@gmail.com | Chennai      |      35 | 2021-03-22| Cancelled   |       1 |      100 |
++--------------+--------------------+--------------+---------+------------+-------------+---------+-----------+
+1 row in set (0.00 sec)
+
+5.Show the list of orders along with ordermenus of a specific customer
+->select a.CustomerName,a.CustomerID,b.OrderDate,b.OrderStatus,c.MenuQty,c.MenuPrice,d1.RestaurantName,d.MenuName,d.MenuType,d.MenuCategory,d.MenuDesc from Customers a,Orders b,OrderMenus c ,RMenuItems d,Restaurants d1 where a.CustomerID=b.CustomerID and b.OrderID=c.OrderID and c.MenuId=d.MenuID and d1.RestaurantID=d.RestaurantID and CustomerName="vishaali";
++--------------+--------------------+------------+-------------+---------+-----------+-----------------+----------+----------+--------------+--------------+
+| CustomerName | CustomerID         | OrderDate  | OrderStatus | MenuQty | MenuPrice | RestaurantName  | MenuName | MenuType | MenuCategory | MenuDesc     |
++--------------+--------------------+------------+-------------+---------+-----------+-----------------+----------+----------+--------------+--------------+
+| nandhini     | nandhini@gmail.com | 2021-03-22 | Cancelled   |       1 |      100 | KFC | non-veg      |  snacks  | snacks       | Hot Wings |
++--------------+--------------------+------------+-------------+---------+-----------+-----------------+----------+----------+--------------+--------------+
+1 row in set (0.00 sec)
+
+6.Show the list of latest 5 orders of a specific customer
+->select a.CustomerName,a.CustomerID,a.CustomerCity,b.OrderID,b.OrderDate,b.OrderStatus,c.MenuQty,c.MenuPrice from Customers a,Orders b,OrderMenus c where a.CustomerID=b.CustomerID and b.OrderID=c.OrderID and CustomerName="vishaali" order by OrderDate desc limit 5;
++--------------+--------------------+--------------+---------+------------+-------------+---------+-----------+
+| CustomerName | CustomerID         | CustomerCity | OrderID | OrderDate  | OrderStatus | MenuQty | MenuPrice |
++--------------+--------------------+--------------+---------+------------+-------------+---------+-----------+
+| vishaali     | nandhini@gmail.com | Chenai        |      31 | 2021-03-22 | Cancelled   |       1 |      100 |
++--------------+--------------------+--------------+---------+------------+-------------+---------+-----------+
+1 row in set (0.00 sec)
+
+
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Functions assignment:
+
+String Functions
+
+ASCII
+
+->select ASCII('nandy');
++-----------------+
+| ASCII('narain') |
++-----------------+
+|             110 |
++-----------------+
+1 row in set (0.00 sec)
+
+CHAR_LENGTH
+->select char_length('sumathi');
++---------------------+
+| char_length('sumathi') |
++---------------------+
+|                   6 |
++---------------------+
+1 row in set (0.00 sec)
+
+CHRACTER_LENGTH
+-> select character_length('kumar');
++----------------------------+
+| character_length('kumar') |
++----------------------------+
+|                          5|
++----------------------------+
+1 row in set (0.00 sec)
+
+CONCAT
+->select concat('nandhini',' ','niranjan');
++---------------------------------+
+| concat('nandhini',' ','niranjan') |
++---------------------------------+
+| nandhini niranjan                 |
++---------------------------------+
+1 row in set (0.00 sec)
+
+CONCAT_WS
+->select concat_ws('_','nandhini','niranjan');
++------------------------------------+
+| concat_ws('_','nandhini','niranjan') |
++------------------------------------+
+| nandhini_niranjan                    |
++------------------------------------+
+1 row in set (0.00 sec)
+
+FIELD
+->select field('nandhini','nandhini','nandhininiranjan','Divya Lakshmi');
++------------------------------------------------------------------+
+| field('nandhini','nandhini','nandhininiranjan','Divya Lakshmi') |
++------------------------------------------------------------------+
+|                                                                1 |
++------------------------------------------------------------------+
+1 row in set (0.00 sec)
+
+FIND_IN_SET
+-> select find_in_set('nandy','nandy,nandhini,Divya');
++---------------------------------------------+
+| find_in_set('nandy','nandy,nandhini,Divya') |
++---------------------------------------------+
+|                                           1 |
++---------------------------------------------+
+1 row in set (0.01 sec)
+
+FORMAT
+->select format(34564.564397764,5);                
++---------------------------+
+| format(34564.564397764,5) |
++---------------------------+
+| 34,564.5640|          
++---------------------------+
+1 row in set (0.00 sec)
+
+
+INSERT
+-> select insert('niranjankumar',1,7,'nandhini');
++----------------------------------------+
+| insert('niranjankumar',1,7,'nandhini') |
++----------------------------------------+
+| nandhinikumar                         |
++----------------------------------------+
+1 row in set (0.00 sec)
+
+INSTR
+-> select INSTR('sumathi','s');
++-----------------------+
+| INSTR('sumathi','s') |
++-----------------------+
+|                     1 |
++-----------------------+
+1 row in set (0.00 sec)
+
+->select lcase('NANDHINI');
++-------------------+
+| lcase('NANDHINI') |
++-------------------+
+| nandhini         |
++-------------------+
+1 row in set (0.00 sec)
+
+->select left('nandhininiranjan',8);
++--------------------------+
+| left('nandhininiranjan',8) |
++--------------------------+
+| nandhini               |
++--------------------------+
+1 row in set (0.02 sec)
+
+-> select length('nandhini niranjan');
++----------------------------+
+| length('nandhini niranjan') |
++----------------------------+
+|                         17 |
++----------------------------+
+1 row in set (0.00 sec)
+
+->select locate('h','nandhini');
++------------------------+
+| locate('h','nandhini') |
++------------------------+
+|                      5 |
++------------------------+
+1 row in set (0.00 sec)
+
+->select lower('AbHiRaMi');
++-------------------+
+| lower('AbHiRaMi') |
++-------------------+
+| abhirami         |
++-------------------+
+1 row in set (0.00 sec)
+
+->select lpad('nandhini',9,'N');
++------------------------+
+| lpad('nandhini',9,'N') |
++------------------------+
+| Nnandhini              |
++------------------------+
+1 row in set (0.00 sec)
+
+->select ltrim('    nandhini');
++-----------------------+
+| ltrim('    nandhini') |
++-----------------------+
+| nandhini             |
++-----------------------+
+1 row in set (0.00 sec)
+
+-> select mid('nandhini',1,4);
++---------------------+
+| mid('nandhini',1,4) |
++---------------------+
+| nand               |
++---------------------+
+1 row in set (0.00 sec)
+
+-> select position('j' IN 'nandhini niranjan');
++------------------------------------+
+| position('j' IN 'nandhini niranjan') |
++------------------------------------+
+|                                 15 |
++------------------------------------+
+1 row in set (0.00 sec)
+
+->select repeat('nandy',3);
++----------------------+
+| repeat('nandy',3)     |
++----------------------+
+| nandynandynandy|
++----------------------+
+1 row in set (0.00 sec)
+
+->select replace('Divyaniranjan','Divya','nandhini');
++-----------------------------------------------+
+| replace('Divyaniranjan','Divya','nandhini') |
++-----------------------------------------------+
+| nandhininiranjan                               |
++-----------------------------------------------+
+1 row in set (0.00 sec)
+
+->select reverse('inihdnan');
++---------------------+
+| reverse('inihdnan') |
++---------------------+
+| nandhini           |
++---------------------+
+1 row in set (0.00 sec)
+
+->select right('nandhininiranjan',8);
++---------------------------+
+| right('nandhininiranjan',8) |
++---------------------------+
+| niranjan                   |
++---------------------------+
+1 row in set (0.00 sec)
+
+->select rpad('lmn',7,'opqr');
++----------------------+
+| rpad('lmn',7,'opqr') |
++----------------------+
+| lmnopqr              |
++----------------------+
+1 row in set (0.00 sec)
+
+-> select rtrim('nandhini        ');
++---------------------------+
+| rtrim('nandhini        ') |
++---------------------------+
+| nandhini                  |
++---------------------------+
+1 row in set (0.00 sec)
+
+-> select space(6);
++----------+
+| space(6) |
++----------+
+|          |
++----------+
+1 row in set (0.03 sec)
+
+->select strcmp('nandhini','nandhini');
++-------------------------------+
+| strcmp('nandhini','nandhini') |
++-------------------------------+
+|                             0 |
++-------------------------------+
+1 row in set (0.00 sec)
+
+->select strcmp('vishaali','vish');
++---------------------------+
+| strcmp('vishaali','vish') |
++---------------------------+
+|                         1 |
++---------------------------+
+1 row in set (0.00 sec)
+
+->select strcmp('nand','nandhini');
++---------------------------+
+| strcmp('nand','nandhini') |
++---------------------------+
+|                        -1 |
++---------------------------+
+1 row in set (0.00 sec)
+
+-> select substr('nandhini'from 1 for 6);
++--------------------------------+
+| substr('nandhini'from 1 for 6) |
++--------------------------------+
+| nandhini                          |
++--------------------------------+
+1 row in set (0.00 sec)
+
+->select substring('vishaalibaskar'from 1 for 8);
++-----------------------------------------+
+| substring('vishaalibaskar'from 1 for 8) |
++-----------------------------------------+
+| vishaali                                |
++-----------------------------------------+
+1 row in set (0.00 sec)
+
+->select substring_index('nandhininiranan3105@gmail.com','@',1);
++---------------------------------------------------+
+| substring_index('nandhininiranjan3105@gmail.com','@',1) |
++---------------------------------------------------+
+| nndhininiranjan3105                                |
++---------------------------------------------------+
+1 row in set (0.00 sec)
+
+-> select trim(both '313' from '313nandhin313');
++----------------------------------------+
+| trim(both '123' from '313nandhini313') |
++----------------------------------------+
+| nandhini                             |
++----------------------------------------+
+1 row in set (0.02 sec)
+
+-> select ucase('nandHInI');
++-------------------+
+| ucase('nandHInI') |
++-------------------+
+| NANDHINI          |
++-------------------+
+1 row in set (0.00 sec)
+
+->select UPPER('nandhINiNiRanJAn');
++-------------------------+
+| UPPER('nandhINiNiRanJAn') |
++-------------------------+
+| NANDHININIRANJAN          |
++-------------------------+
+1 row in set (0.00 sec)
+
+
+Numeric/Math Functions
+
+-> select ABS(45);
++---------+
+| ABS(45) |
++---------+
+|      45 |
++---------+
+1 row in set (0.00 sec)
+
+->select ABS(45.00);
++------------+
+| ABS(45.00) |
++------------+
+|      45.00 |
++------------+
+1 row in set (0.00 sec)
+
+->select acos(0.65);
++-------------------+
+| acos(0.65)        |
++-------------------+
+| 0.863211890069541 |
++-------------------+
+1 row in set (0.03 sec)
+
+-> select asin(0.90);
++--------------------+
+| asin(0.90)         |
++--------------------+
+| 1.1197695149986342 |
++--------------------+
+1 row in set (0.00 sec)
+
+-> select atan(2.56);
++--------------------+
+| atan(2.56)         |
++--------------------+
+| 1.1983978801181423 |
++--------------------+
+1 row in set (0.11 sec)
+
+-> select atan2(2.56,3);
++--------------------+
+| atan2(2.56,3)      |
++--------------------+
+| 0.7064260556560561 |
++--------------------+
+1 row in set (0.00 sec)
+
+->select avg(amount) from transactioninfo;
++-------------+
+| avg(amount) |
++-------------+
+|  62867.2667 |
++-------------+
+1 row in set (0.04 sec)
+
+-> select ceil(7.5);
++-----------+
+| ceil(7.5) |
++-----------+
+|         8 |
++-----------+
+1 row in set (0.03 sec)
+
+-> select ceiling(10.2);
++---------------+
+| ceiling(10.2) |
++---------------+
+|            11 |
++---------------+
+1 row in set (0.00 sec)
+
+-> select cos(90);
++---------------------+
+| cos(90)             |
++---------------------+
+| -0.4480736161291701 |
++---------------------+
+1 row in set (0.01 sec)
+
+->select cot(4.5);
++---------------------+
+| cot(4.5)            |
++---------------------+
+| 0.21564123255279444 |
++---------------------+
+1 row in set (0.00 sec)
+
+->select count(customername) from customerinfo;
++---------------------+
+| count(customername) |
++---------------------+
+|                  10 |
++---------------------+
+1 row in set (0.02 sec)
+
+->select degrees(PI()*30);
++------------------+
+| degrees(PI()*30) |
++------------------+
+|             5400 |
++------------------+
+1 row in set (0.00 sec)
+
+-> select 50 DIV 2;
++----------+
+| 50 DIV 2 |
++----------+
+|       25 |
++----------+
+1 row in set (0.00 sec)
+
+-> select exp(2);
++------------------+
+| exp(2)           |
++------------------+
+| 7.38905609893065 |
++------------------+
+1 row in set (0.00 sec)
+
+
+->select floor(2.9);
++------------+
+| floor(4.9) |
++------------+
+|          4 |
++------------+
+1 row in set (0.00 sec)
+
+-> select greatest(4,3,8,7);
++-------------------+
+| greatest(4,3,8,7) |
++-------------------+
+|                 8 |
++-------------------+
+1 row in set (0.03 sec)
+
+-> select least('4','6','12');
++---------------------------------+
+| least('4','6','12') |
++---------------------------------+
+| 12                          |
++---------------------------------+
+1 row in set (0.00 sec)
+
+->select ln(90);
++-------------------+
+| ln(90)            |
++-------------------+
+| 4.499809670330265 |
++-------------------+
+1 row in set (0.04 sec)
+
+-> select log(90);
++-------------------+
+| log(90)           |
++-------------------+
+| 4.499809670330265 |
++-------------------+
+1 row in set (0.00 sec)
+
+->select log10(1);
++----------+
+| log10(1) |
++----------+
+|        0 |
++----------+
+1 row in set (0.00 sec)
+
+-> select log2(1);
++---------+
+| log2(1) |
++---------+
+|       0 |
++---------+
+1 row in set (0.00 sec)
+
+->select max(amount)from transactioninfo;
++-------------+
+| max(amount) |
++-------------+
+|       90505 |
++-------------+
+1 row in set (0.03 sec)
+
+
+->select min(amount)from transactioninfo;
++-------------+
+| min(amount) |
++-------------+
+|       10000 |
++-------------+
+1 row in set (0.00 sec)
+
+-> select mod(5,2);
++----------+
+| mod(5,2) |
++----------+
+|        1 |
++----------+
+1 row in set (0.00 sec)
+
+->select PI()*50;
++------------+
+| PI()*50    |
++------------+
+| 157.079633 |
++------------+
+1 row in set (0.00 sec)
+
+
+->select pow(4,3);
++----------+
+| pow(4,3) |
++----------+
+|       64 |
++----------+
+1 row in set (0.02 sec)
+
+-> select power(2,-4);
++-------------+
+| power(2,-4) |
++-------------+
+|      0.0625 |
++-------------+
+1 row in set (0.00 sec)
+
+->select radians(2);
++---------------------+
+| radians(2)          |
++---------------------+
+| 0.03490658503988659 |
++---------------------+
+1 row in set (0.00 sec)
+
+
+->select rand()*10+5;
++-------------------+
+| rand()*10+5       |
++-------------------+
+| 7.750695639057732 |
++-------------------+
+1 row in set (0.02 sec)
+
+->select round(12345.148996);
++---------------------+
+| round(12345.148996) |
++---------------------+
+|               12345 |
++---------------------+
+1 row in set (0.00 sec)
+
+-> select sign(-12345.148996);
++---------------------+
+| sign(-12345.148996) |
++---------------------+
+|                  -1 |
++---------------------+
+1 row in set (0.00 sec)
+
+-> select sin(90);
++--------------------+
+| sin(90)            |
++--------------------+
+| 0.8939966636005579 |
++--------------------+
+1 row in set (0.00 sec)
+
+-> select sqrt(9);
++---------+
+| sqrt(9) |
++---------+
+|       3 |
++---------+
+1 row in set (0.00 sec)
+
+-> select sum(amount)from transactioninfo;
++-------------+
+| sum(amount) |
++-------------+
+|      943009 |
++-------------+
+1 row in set (0.00 sec)
+
+->select tan(9);
++----------------------+
+| tan(9)               |
++----------------------+
+| -0.45231565944180985 |
++----------------------+
+1 row in set (0.00 sec)
+
+->select truncate(12345.698,2);
++-----------------------+
+| truncate(12345.698,2) |
++-----------------------+
+|              12345.69 |
++-----------------------+
+1 row in set (0.00 sec)
+
+Date/Time Functions
+
+->select adddate('2021-05-23',3);
++-------------------------+
+| adddate('2021-05-23',3) |
++-------------------------+
+| 2021-05-26              |
++-------------------------+
+1 row in set (0.02 sec)
+
+->select addtime('01:15:23.99','5.001');
++--------------------------------+
+| addtime('01:15:23.99','5.001') |
++--------------------------------+
+| 01:15:28.991000                |
++--------------------------------+
+1 row in set (0.00 sec)
+
+->select curdate()+4;
++-------------+
+| curdate()+3 |
++-------------+
+|    20210909 |
++-------------+
+1 row in set (0.00 sec)
+
+-> select current_date();
++----------------+
+| current_date() |
++----------------+
+| 2021-09-05     |
++----------------+
+1 row in set (0.00 sec)
+
+-> select current_time();
++----------------+
+| current_time() |
++----------------+
+| 15:31:16       |
++----------------+
+1 row in set (0.00 sec)
+
+->select current_timestamp()+2;
++-----------------------+
+| current_timestamp()+2 |
++-----------------------+
+|        20210905153235 |
++-----------------------+
+1 row in set (0.00 sec)
+
+-> select date('2008-07-05');
++--------------------+
+| date('2008-07-05') |
++--------------------+
+| 2008-07-05         |
++--------------------+
+1 row in set (0.00 sec)
+
+->select date_add('2000-05-06',interval 5 year);
++----------------------------------------+
+| date_add('2000-05-06',interval 5 year) |
++----------------------------------------+
+| 2005-05-06                             |
++----------------------------------------+
+1 row in set (0.00 sec)
+
+->select date_format('2019-05-23','%W');
++--------------------------------+
+| date_format('2019-05-23','%W') |
++--------------------------------+
+| Thursday                     |
++--------------------------------+
+1 row in set (0.07 sec)
+
+-> select date_sub('2014-05-03',interval 13 week);
++-----------------------------------------+
+| date_sub('2014-05-03',interval 13 week) |
++-----------------------------------------+
+| 2014-02-01                              |
++-----------------------------------------+
+1 row in set (0.00 sec)
+
+-> select datediff('2000-05-06','2003-03-22');
++-------------------------------------+
+| datediff('2000-05-06','2003-03-22') |
++-------------------------------------+
+|                               -1050 |
++-------------------------------------+
+1 row in set (0.00 sec)
+
+-> select day('2008-07-05');
++-------------------+
+| day('2008-07-05') |
++-------------------+
+|                 5 |
++-------------------+
+1 row in set (0.00 sec)
+
+-> select dayname('2019-05-23');
++-----------------------+
+| dayname('2019-05-23') |
++-----------------------+
+| Thursday             |
++-----------------------+
+1 row in set (0.00 sec)
+
+-> select dayofmonth('2008-07-05');
++--------------------------+
+| dayofmonth('2008-07-05') |
++--------------------------+
+|                        5 |
++--------------------------+
+1 row in set (0.00 sec)
+
+->select dayofweek('2000-05-06');
++-------------------------+
+| dayofweek('2000-05-31') |
++-------------------------+
+|                       3 |
++-------------------------+
+1 row in set (0.00 sec)
+
+->select dayofyear('2000-05-31');
++-------------------------+
+| dayofyear('2000-05-06') |
++-------------------------+
+|                     152 |
++-------------------------+
+1 row in set (0.00 sec)
+
+->SELECT EXTRACT(WEEK FROM '2000-05-06');
++---------------------------------+
+| EXTRACT(WEEK FROM '2000-05-31') |
++---------------------------------+
+|                              22 |
++---------------------------------+
+1 row in set (0.00 sec)
+
+-> select from_days(736040);
++-------------------+
+| from_days(736040) |
++-------------------+
+| 2015-03-18        |
++-------------------+
+1 row in set (0.00 sec)
+
+->select hour('15:13:34');
++------------------+
+| hour('15:13:34') |
++------------------+
+|               15 |
++------------------+
+1 row in set (0.02 sec)
+
+->select last_day('2008-11-19');
++------------------------+
+| last_day('2008-11-19') |
++------------------------+
+| 2008-11-30             |
++------------------------+
+1 row in set (0.00 sec)
+
+-> select localtime();
++---------------------+
+| localtime()         |
++---------------------+
+| 2021-09-05 18:56:45 |
++---------------------+
+1 row in set (0.00 sec)
+
+-> select localtimestamp();
++---------------------+
+| localtimestamp()    |
++---------------------+
+| 2021-09-05 19:01:05 |
++---------------------+
+1 row in set (0.00 sec)
+
+-> select makedate(2015,30);
++-------------------+
+| makedate(2015,30) |
++-------------------+
+| 2015-01-30        |
++-------------------+
+1 row in set (0.00 sec)
+
+->select maketime(726,35,45);
++---------------------+
+| maketime(726,35,45) |
++---------------------+
+| 726:35:45           |
++---------------------+
+1 row in set (0.00 sec)
+
+->select microsecond('2000-05-31');
++---------------------------+
+| microsecond('2000-05-31') |
++---------------------------+
+|                         0 |
++---------------------------+
+1 row in set, 1 warning (0.01 sec)
+
+-> select minute('2000-05-06');
++----------------------+
+| minute('2000-05-06') |
++----------------------+
+|                   20 |
++----------------------+
+1 row in set, 1 warning (0.00 sec)
+
+->select month('2000-05-06');
++---------------------+
+| month('2008-07-05') |
++---------------------+
+|                   7|
++---------------------+
+1 row in set (0.00 sec)
+
+-> select monthname('2008-07-05');
++-------------------------+
+| monthname('2008-07-05') |
++-------------------------+
+| July                    |
++-------------------------+
+1 row in set (0.00 sec)
+
+-> select now();
++---------------------+
+| now()               |
++---------------------+
+| 2021-09-05 19:25:13 |
++---------------------+
+1 row in set (0.00 sec)
+
+->select period_add(200007,5);
++----------------------+
+| period_add(200007,7) |
++----------------------+
+|               200014 |
++----------------------+
+1 row in set (0.04 sec)
+
+-> select period_diff(200006,201702);
++----------------------------+
+| period_diff(200006,201702) |
++----------------------------+
+|                       -200 |
++----------------------------+
+1 row in set (0.00 sec)
+
+->select quarter('2000-05-06');
++-----------------------+
+| quarter('2000-05-06') |
++-----------------------+
+|                     2 |
++-----------------------+
+
+-> select sec_to_time(1);
++----------------+
+| sec_to_time(1) |
++----------------+
+| 00:00:01       |
++----------------+
+1 row in set (0.00 sec)
+
+->select second('15:156:34');
++--------------------+
+| second('15:56:34') |
++--------------------+
+|                  34 |
++--------------------+
+1 row in set (0.00 sec)
+
+-> SELECT STR_TO_DATE('2014,2,28 09', '%Y,%m,%d %h');
++--------------------------------------------+
+| STR_TO_DATE('2014,2,28 09', '%Y,%m,%d %h') |
++--------------------------------------------+
+| 2014-02-28 09:00:00                        |
++--------------------------------------------+
+1 row in set (0.00 sec)
+
+->select subdate('2008-07-05',15);
++--------------------------+
+| subdate('2008-07-05',10) |
++--------------------------+
+| 2008-06-25               |
++--------------------------+
+1 row in set (0.00 sec)
+
+-> select subtime('12:13:05','5.0001');
++------------------------------+
+| subtime('12:13:05','5.0001') |
++------------------------------+
+| 12:12:59.999900              |
++------------------------------+
+1 row in set (0.00 sec)
+
+
+-> select sysdate();
++---------------------+
+| sysdate()           |
++---------------------+
+| 2021-09-05 20:50:01 |
++---------------------+
+1 row in set (0.00 sec)
+
+->select time('19:12:05');
++------------------+
+| time('19:12:05') |
++------------------+
+| 19:12:05         |
++------------------+
+1 row in set (0.06 sec)
+
+->SELECT TIME_FORMAT('15:02:28', '%h:%i%p');
++------------------------------------+
+| TIME_FORMAT('15:02:28', '%h:%i%p') |
++------------------------------------+
+| 03:02PM                            |
++------------------------------------+
+1 row in set (0.00 sec)
+
+
+-> select time_to_sec('12:13:05');
++-------------------------+
+| time_to_sec('12:13:05') |
++-------------------------+
+|                   43985 |
++-------------------------+
+1 row in set (0.04 sec)
+
+->select timediff('12:13:05','01:12:01');
++---------------------------------+
+| timediff('12:13:05','01:12:01') |
++---------------------------------+
+| 11:01:04                        |
++---------------------------------+
+1 row in set (0.00 sec)
+
+-> select timestamp('2000-05-31');
++-------------------------+
+| timestamp('2000-05-31') |
++-------------------------+
+| 2000-05-31 00:00:00     |
++-------------------------+
+1 row in set (0.00 sec)
+
+-> select to_days('2000-05-06');
++-----------------------+
+| to_days('2000-05-06') |
++-----------------------+
+|                730611 |
++-----------------------+
+1 row in set (0.01 sec)
+
+->select week('2000-05-06');
++--------------------+
+| week('2000-05-06') |
++--------------------+
+|                 18 |
++--------------------+
+1 row in set (0.03 sec)
+
+->select weekday('2000-05-06');
++-----------------------+
+| weekday('2000-05-06') |
++-----------------------+
+|                     5 |
++-----------------------+
+1 row in set (0.00 sec)
+
+->select weekofyear('2000-05-31');
++--------------------------+
+| weekofyear('2000-05-31') |
++--------------------------+
+|                       22 |
++--------------------------+
+1 row in set (0.00 sec)
+
+-> select year('2000-05-06');
++--------------------+
+| year('2000-05-06') |
++--------------------+
+|               2000 |
++--------------------+
+1 row in set (0.00 sec)
+
+->select yearweek('2000-05-06');
++------------------------+
+| yearweek('2000-05-06') |
++------------------------+
+|                 200018 |
++------------------------+
+1 row in set (0.00 sec)
+
+->select bin(10);
++---------+
+| bin(10) |
++---------+
+| 1010    |
++---------+
+1 row in set (0.00 sec)
+
+->select binary('vish');
++--------------------------------+
+| binary('vish')                 |
++--------------------------------+
+| 0x76697368                     |
++--------------------------------+
+1 row in set (0.00 sec)
+
+->SELECT CAST('2014-02-28' AS DATE);
++----------------------------+
+| CAST('2014-02-28' AS DATE) |
++----------------------------+
+| 2014-02-28                 |
++----------------------------+
+1 row in set (0.00 sec)
+
+->select coalesce(null,null,1,2,2);
++---------------------------+
+| coalesce(null,null,1,2,2) |
++---------------------------+
+|                         1 |
++---------------------------+
+1 row in set (0.00 sec)
+
+->select connection_id();
++-----------------+
+| connection_id() |
++-----------------+
+|              34 |
++-----------------+
+1 row in set (0.00 sec)
+
+->select conv(5,10,10);
++---------------+
+| conv(5,10,10) |
++---------------+
+| 5             |
++---------------+
+1 row in set (0.00 sec)
+
+-> select convert(125,char);
++-------------------+
+| convert(125,char) |
++-------------------+
+| 125               |
++-------------------+
+1 row in set (0.00 sec)
+
+->select current_user();
++----------------+
+| current_user() |
++----------------+
+| nandy@13         |
++----------------+
+1 row in set (0.00 sec)
+
+-> SELECT IF(100<200, 5000, 6000);
++-------------------------+
+| IF(100<200, 5000, 6000) |
++-------------------------+
+|                    5000 |
++-------------------------+
+1 row in set (0.00 sec)
+
+
+->select isnull(20);
++------------+
+| isnull(20) |
++------------+
+|          0 |
++------------+
+1 row in set (0.14 sec)
+
+->select nullif('nand','nand');
++-----------------------+
+| nullif('nand','nand') |
++-----------------------+
+| NULL                  |
++-----------------------+
+1 row in set (0.00 sec)
+
+->select session_user();
++----------------+
+| session_user() |
++----------------+
+| nandy@localhost |
++----------------+
+1 row in set (0.01 sec)
+
+->select system_user();
++----------------+
+| system_user()  |
++----------------+
+| nandy@localhost |
++----------------+
+1 row in set (0.00 sec)
+
+
+->select user();
++----------------+
+| user()         |
++----------------+
+| nandy@localhost |
++----------------+
+1 row in set (0.00 sec)
+
+-> select version();
++-----------+
+| version() |
++-----------+
+| 10.0.19043.1165    |
++-----------+
+1 row in set (0.06 sec)
+
